@@ -1,0 +1,14 @@
+.light_theme {
+  @apply bg-white text-black;
+}
+
+/* Hero Section */
+.light_theme_circle {
+  @apply bg-[#ADB7BE]
+}
+
+/* Footer Section */
+.ficon:hover {
+  filter: invert(0%) sepia(0%) saturate(2%) hue-rotate(184deg) brightness(110%)
+    contrast(101%);
+}

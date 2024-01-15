@@ -1,0 +1,11 @@
+.normal_arrow {
+  @apply flex items-center justify-center px-3 py-3 mx-1 rounded-md rtl:-scale-x-100 bg-white;
+}
+
+.more_pages {
+  @apply transition-colors duration-300 transform hover:text-white hover:bg-primary-300
+}
+
+.page_number {
+  @apply px-4 py-2 mx-1 transition-colors duration-300 transform rounded-md sm:inline hover:bg-primary-300 hover:text-white
+}

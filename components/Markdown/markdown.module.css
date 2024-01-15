@@ -1,0 +1,8 @@
+.markdown-section {
+  display: flex;
+  width: 100%;
+}
+
+.light_theme_form {
+  @apply text-black text-sm rounded-lg block w-full md:w-6/12 p-2.5 border border-[#ADB7BE] placeholder-[#9CA2A9];
+}

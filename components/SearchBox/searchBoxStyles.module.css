@@ -1,0 +1,7 @@
+.search_desktop {
+  @apply px-2 w-8 hover:w-32 rounded-full transition-all duration-500 ease-out text-white bg-transparent border-2 border-gray-400 focus:outline-primary-300;
+}
+
+.search_mobile {
+  @apply px-2 w-8 hover:w-32 rounded-full transition-all duration-500 ease-out text-white bg-transparent border-2 border-gray-400 focus:outline-primary-300;
+}

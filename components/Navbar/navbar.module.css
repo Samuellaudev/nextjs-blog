@@ -1,0 +1,8 @@
+.menuIcon {
+  @apply flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white;
+}
+
+.ficon:hover {
+  filter: invert(0%) sepia(0%) saturate(2%) hue-rotate(184deg) brightness(110%)
+    contrast(101%);
+}
