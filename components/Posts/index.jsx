@@ -1,13 +1,14 @@
 'use client';
+import { POSTS_URL } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import axios from 'axios';
 import { readingTime, formatDate } from '@/utils/helpers';
 import Pagination from '@/components/Pagination';
-import { ToastContainer, toast } from 'react-toastify';
-import axios from 'axios';
 import Loading from './Loading';
 import styles from './postsStyles.module.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Posts = ({ pageHeading }) => {
   const [postsData, setPostsData] = useState({ page: 1, pages: 1, posts: [] });
@@ -25,7 +26,7 @@ const Posts = ({ pageHeading }) => {
       const response = await axios.get(
         `/api/posts?search=${search}&pageNumber=${pageNumber}`,
       );
-      const postsData = response.data;
+      const postsData = await response.data;
 
       setPostsData(postsData);
       setIsLoading(false);
@@ -83,7 +84,7 @@ const Posts = ({ pageHeading }) => {
       ) : (
         <>
           <ul className={styles.article_ul}>
-            {postsData?.posts.map((post) => (
+            {postsData?.posts?.map((post) => (
               <li key={post._id}>
                 <Link
                   href={`/blog/${post._id}`}

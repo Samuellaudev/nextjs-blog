@@ -1,9 +1,6 @@
 import mongoose from 'mongoose';
-import { connectDB } from '@/lib/db.js';
 
-connectDB();
-
-const postSchema = mongoose.Schema({
+const postSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -30,6 +27,6 @@ const postSchema = mongoose.Schema({
   },
 });
 
-const Post = mongoose.model('Post', postSchema);
+const Post = mongoose.models?.Post || mongoose.model('Post', postSchema);
 
 export default Post;
