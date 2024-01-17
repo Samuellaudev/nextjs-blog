@@ -51,3 +51,43 @@ export async function DELETE(request, { params }) {
     throw new Error('Failed to delete post!');
   }
 }
+
+// @desc   Update single blog post
+// @route  PUT /api/posts/:id
+// @access Private
+export async function PUT(request, { params }) {
+  const { id } = params;
+  const updatedData = await request.json();
+  const { title, body, description, image } = updatedData;
+
+  try {
+    const response = await verifyToken();
+    const { status, message } = await response.json();
+    if (status !== 200) {
+      return NextResponse.json({
+        status,
+        message,
+      });
+    }
+
+    const post = await Post.findById(id);
+
+    if (post) {
+      post.title = title || post.title;
+      post.body = body || post.body;
+      post.description = description || post.description;
+      post.image = image || post.image;
+      post.updatedAt = Date.now();
+
+      await post.save();
+
+      return NextResponse.json({
+        status: 200,
+        success: true,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error('Post not found!');
+  }
+}
