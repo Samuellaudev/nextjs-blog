@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import Post from '@/models/postModel.js';
+import connectDB from '@/lib/db';
 import verifyToken from '@/utils/verifyToken';
 
 export const dynamic = 'force-dynamic';
@@ -16,6 +17,8 @@ export async function GET(request) {
   const page = Number(pageNumber) || 1;
 
   try {
+    await connectDB();
+
     const searchKeyword = search
       ? {
           title: {

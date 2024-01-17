@@ -126,19 +126,25 @@ const EditOrAddNewPost = ({ postType }) => {
         response = await axios.post(`${POSTS_URL}`, postData);
       }
 
+      const { status, message } = response.data;
+      if (status === 401) {
+        toast.error(message);
+        return;
+      }
+
+      // Upload to aws-s3
       if (image?.name) {
         handleImage(image);
       }
-      console.log(response);
-      if (response.status === 200) {
-        toast.success(fieldMap[postType].successMessage);
 
-        if (postType === 'new-post') {
-          resetForm();
-        }
-
-        // redirectToDashboard();
+      if (postType === 'new-post') {
+        resetForm();
       }
+
+      toast.success(fieldMap[postType].successMessage);
+      setTimeout(() => {
+        redirectToDashboard();
+      }, 500);
     } catch (error) {
       console.log(error);
       toast.error(fieldMap[postType].errorMessage);
