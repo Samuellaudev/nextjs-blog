@@ -3,7 +3,6 @@
 import { AWS_S3_UPLOAD_URL, POSTS_URL, fieldMap } from '@/utils/constants';
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import Image from 'next/image';
 import axios from 'axios';
 import MarkdownPreview from '@/components/Markdown/MarkdownPreview';
 import { ToastContainer, toast } from 'react-toastify';
@@ -75,21 +74,19 @@ const EditOrAddNewPost = ({ postType }) => {
     };
 
     const handleImage = (image) => {
-      if (image?.name) {
-        const newImage = new File(
-          [image],
-          modifiedImageName(params.id, image?.name),
-          {
-            type: image.type,
-            lastModified: image.lastModified,
-          },
-        );
+      const newImage = new File(
+        [image],
+        modifiedImageName(params.id, image?.name),
+        {
+          type: image.type,
+          lastModified: image.lastModified,
+        },
+      );
 
-        const formData = new FormData();
-        formData.append('image', newImage);
+      const formData = new FormData();
+      formData.append('image', newImage);
 
-        uploadImage(formData);
-      }
+      uploadImage(formData);
     };
 
     const resetForm = () => {
@@ -129,8 +126,10 @@ const EditOrAddNewPost = ({ postType }) => {
         response = await axios.post(`${POSTS_URL}`, postData);
       }
 
-      handleImage(image);
-
+      if (image?.name) {
+        handleImage(image);
+      }
+      console.log(response);
       if (response.status === 200) {
         toast.success(fieldMap[postType].successMessage);
 
@@ -138,7 +137,7 @@ const EditOrAddNewPost = ({ postType }) => {
           resetForm();
         }
 
-        redirectToDashboard();
+        // redirectToDashboard();
       }
     } catch (error) {
       console.log(error);

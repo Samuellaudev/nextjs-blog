@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 import Post from '@/models/postModel.js';
-import connectDB from '@/lib/db.js';
 
 export const dynamic = 'force-dynamic';
 
@@ -12,8 +10,6 @@ export async function GET(request, { params }) {
   const { id } = params;
 
   try {
-    connectDB();
-
     const post = await Post.findById(id);
 
     return NextResponse.json(post);

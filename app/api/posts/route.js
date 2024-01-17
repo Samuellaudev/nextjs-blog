@@ -1,9 +1,6 @@
 import { NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
 import Post from '@/models/postModel.js';
-import connectDB from '@/lib/db.js';
-
-const backendUrl = process.env.BACKEND_URL;
+import verifyToken from '@/utils/verifyToken';
 
 export const dynamic = 'force-dynamic';
 
@@ -19,8 +16,6 @@ export async function GET(request) {
   const page = Number(pageNumber) || 1;
 
   try {
-    connectDB();
-
     const searchKeyword = search
       ? {
           title: {
@@ -43,5 +38,54 @@ export async function GET(request) {
     });
   } catch (error) {
     return NextResponse.json({ error });
+  }
+}
+
+// @desc   Create single blog post
+// @route  POST /api/posts
+// @access Private
+export async function POST(request) {
+  try {
+    const postData = await request.json();
+    const { title, body, description, image } = postData;
+
+    const response = await verifyToken();
+    const { status, message } = await response.json();
+
+    if (status !== 200) {
+      return NextResponse.json({
+        status,
+        message,
+      });
+    }
+
+    const newPost = await Post.create({
+      title,
+      body,
+      description,
+      image,
+    });
+
+    if (newPost) {
+      return NextResponse.json({
+        status,
+        message,
+        title: newPost.title,
+        body: newPost.body,
+        description: newPost.description,
+        image: newPost.image,
+      });
+    } else {
+      return NextResponse.json({
+        status: 500,
+        message: 'Failed to create a new post',
+      });
+    }
+  } catch (error) {
+    console.error('Error in POST request:', error);
+    return NextResponse.json({
+      status: 500,
+      message: 'Internal Server Error',
+    });
   }
 }

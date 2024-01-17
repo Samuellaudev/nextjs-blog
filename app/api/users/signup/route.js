@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import { USERS_URL } from '@/utils/constants';
 import User from '@/models/userModel.js';
-import connectDB from '@/lib/db.js';
 import { v4 as uuid } from 'uuid';
 import sendEmail from '@/utils/sendEmail.js';
 import generateToken from '@/utils/generateToken.js';
@@ -11,8 +10,6 @@ import generateToken from '@/utils/generateToken.js';
 // @access  Public
 export async function POST(request) {
   try {
-    connectDB();
-
     const requestData = await request.json();
     const { name, email, password } = requestData;
 
