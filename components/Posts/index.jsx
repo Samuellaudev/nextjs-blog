@@ -24,7 +24,7 @@ const Posts = ({ pageHeading }) => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `/api/posts?search=${search}&pageNumber=${pageNumber}`,
+        `${POSTS_URL}?search=${search}&pageNumber=${pageNumber}`,
       );
       const postsData = await response.data;
 
@@ -45,7 +45,7 @@ const Posts = ({ pageHeading }) => {
 
   const handleDeletePost = async (id) => {
     try {
-      await axios.delete(`/api/posts/${id}`);
+      await axios.delete(`${POSTS_URL}/${id}`);
 
       fetchPosts();
       toast.success('Deleted post successfully');
