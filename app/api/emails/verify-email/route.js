@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server';
 import User from '@/models/userModel.js';
 import generateToken from '@/utils/generateToken.js';
-// const backendUrl = process.env.BACKEND_URL;
 
 // @desc   Verify email from new registered user
 // @route  PUT /api/emails/verify-email

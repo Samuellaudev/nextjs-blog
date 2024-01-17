@@ -3,12 +3,12 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const transporter = nodemailer.createTransport({
-  host: 'smtp.forwardemail.net',
+  host: process.env.SMTP_HOST,
   port: 465,
   secure: true,
   auth: {
-    user: process.env.FORWARDEMAIL_EMAIL,
-    pass: process.env.FORWARDEMAIL_PASSWORD,
+    user: process.env.SMTP_EMAIL,
+    pass: process.env.SMTP_PASSWORD,
   },
 });
 

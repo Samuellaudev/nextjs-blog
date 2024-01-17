@@ -25,7 +25,6 @@ export const navLinks = [
 ];
 
 // API path
-export const BACKEND_URL = process.env.BACKEND_URL;
 export const SEND_URL = '/api/send';
 export const USERS_URL = '/api/users';
 export const POSTS_URL = '/api/posts';

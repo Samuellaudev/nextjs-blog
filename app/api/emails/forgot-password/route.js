@@ -8,7 +8,7 @@ import sendEmail from '@/utils/sendEmail.js';
 // @access Private
 export async function PUT(request) {
   const sender = process.env.SENDER_NAME;
-  const senderEmail = process.env.FORWARDEMAIL_EMAIL;
+  const senderEmail = process.env.SMTP_EMAIL;
   const frontendURL = process.env.FRONTEND_URL;
 
   const sendPasswordResetEmail = async (email, code) => {

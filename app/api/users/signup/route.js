@@ -30,9 +30,9 @@ export async function POST(request) {
 
     try {
       await sendEmail({
-        from: `Samuel Lau <${process.env.FORWARDEMAIL_EMAIL}>`,
+        from: `Samuel Lau <${process.env.SMTP_EMAIL}>`,
         to: email,
-        bcc: process.env.FORWARDEMAIL_EMAIL,
+        bcc: process.env.SMTP_EMAIL,
         subject: 'Please verify your email',
         text: `
         Thanks for signing up! To verify your email, click here:
