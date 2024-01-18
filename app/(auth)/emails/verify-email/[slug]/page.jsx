@@ -1,5 +1,5 @@
 'use client';
-import { EMAILS_URL } from '@/utils/constants';
+import { EMAILS_URL, blogPage } from '@/utils/constants';
 import { useEffect, useState, useContext } from 'react';
 import { ThemeContext } from '@/context/theme-provider';
 import axios from 'axios';
@@ -55,7 +55,7 @@ const EmailVerification = () => {
           </p>
         </div>
         <p className="border border-gray-300 rounded-md px-4 py-2 text-lg cursor-pointer hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition duration-200">
-          <Link href="/dashboard?search=&pageNumber=1">Go to dashboard</Link>
+          <Link href={`${blogPage}`}>Go to blog page</Link>
         </p>
       </div>
     </div>

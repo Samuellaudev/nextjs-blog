@@ -1,6 +1,11 @@
 'use client';
 
-import { AWS_S3_UPLOAD_URL, POSTS_URL, fieldMap } from '@/utils/constants';
+import {
+  AWS_S3_UPLOAD_URL,
+  POSTS_URL,
+  fieldMap,
+  dashboardPage,
+} from '@/utils/constants';
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import axios from 'axios';
@@ -98,7 +103,7 @@ const EditOrAddNewPost = ({ postType }) => {
 
     const redirectToDashboard = () => {
       setTimeout(() => {
-        router.push('/dashboard?search=&pageNumber=1');
+        router.push(`${dashboardPage}`);
       }, 500);
     };
 

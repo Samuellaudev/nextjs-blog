@@ -1,9 +1,10 @@
-import React from 'react';
+import { blogPage, dashboardPage } from '@/utils/constants';
 import NavLink from './NavLink';
 import ThemeSwitch from '../ThemeSwitch';
 
 const MenuOverlay = ({
   isLogin,
+  isAdmin,
   username,
   links,
   pathname,
@@ -13,11 +14,19 @@ const MenuOverlay = ({
   const renderLoggedInLinks = () => {
     return (
       <>
-        <NavLink
-          href="/dashboard?search=&pageNumber=1"
-          title={`(${username})`}
-          pathname={pathname}
-        />
+        {isAdmin ? (
+          <NavLink
+            href={`${dashboardPage}`}
+            title={`(${username})`}
+            pathname={pathname}
+          />
+        ) : (
+          <NavLink
+            href={`${blogPage}`}
+            title={`(${username})`}
+            pathname={pathname}
+          />
+        )}
         <NavLink href="" title="Logout" pathname="/logout" onClick={onClick} />
       </>
     );

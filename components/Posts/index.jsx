@@ -1,5 +1,5 @@
 'use client';
-import { POSTS_URL, USERS_URL } from '@/utils/constants';
+import { POSTS_URL, USERS_URL, blogPage } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -101,7 +101,7 @@ const Posts = ({ pageHeading }) => {
           <>
             <h1 className={`${styles.tabs__heading}`}>{pageHeading}</h1>
             <button
-              onClick={() => router.push('/blog?search=&pageNumber=1')}
+              onClick={() => router.push(`${blogPage}`)}
               className={`${styles.light_theme_back_btn} dark:border dark:border-white dark:hover:bg-white dark:hover:text-black`}
             >
               &larr; <span className="hidden md:inline">Back</span>
@@ -192,7 +192,7 @@ const Posts = ({ pageHeading }) => {
           <h1 className={`${styles.tabs__heading}`}>{pageHeading}</h1>
           {pageHeading === 'Latest Posts' && search.length > 0 && (
             <button
-              onClick={() => router.push('/blog?search=&pageNumber=1')}
+              onClick={() => router.push(`${blogPage}`)}
               className={`${styles.light_theme_back_btn} dark:border dark:border-white dark:hover:bg-white dark:hover:text-black`}
             >
               &larr; <span className="hidden md:inline">Back</span>

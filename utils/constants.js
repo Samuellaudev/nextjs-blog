@@ -47,3 +47,7 @@ export const fieldMap = {
     errorMessage: 'Unable to edit post',
   },
 };
+
+// Page path
+export const blogPage = '/blog?search=&pageNumber=1';
+export const dashboardPage = '/dashboard?search=&pageNumber=1';

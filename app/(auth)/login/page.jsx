@@ -1,5 +1,5 @@
 'use client';
-import { USERS_URL } from '@/utils/constants';
+import { USERS_URL, blogPage } from '@/utils/constants';
 import { useEffect, useState, useContext } from 'react';
 import { ThemeContext } from '@/context/theme-provider';
 import axios from 'axios';
@@ -17,7 +17,7 @@ const Login = () => {
   useEffect(() => {
     const isUserLoggedIn = localStorage.getItem('isLogin') === 'true';
     if (isUserLoggedIn) {
-      router.push('/dashboard?search=&pageNumber=1');
+      router.push(`${blogPage}`);
     }
   }, [router]);
 
@@ -41,7 +41,7 @@ const Login = () => {
       setUserInfo(data);
 
       localStorage.setItem('isLogin', true);
-      router.push('/dashboard?search=&pageNumber=1');
+      router.push(`${blogPage}`);
     } catch (error) {
       console.error('Login error:', error);
     }

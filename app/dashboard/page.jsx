@@ -1,4 +1,5 @@
 'use client';
+import { blogPage } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './dashboardStyles.module.css';
@@ -10,8 +11,10 @@ const Dashboard = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!localStorage.getItem('isLogin') || !localStorage.getItem('userInfo')) {
-      router.push('/');
+    const user = JSON.parse(localStorage.getItem('userInfo'));
+
+    if (!user?.isAdmin) {
+      router.push(`${blogPage}`);
       setIsLogin(false);
       return;
     }

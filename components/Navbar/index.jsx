@@ -1,5 +1,5 @@
 'use client';
-import { USERS_URL } from '@/utils/constants';
+import { USERS_URL, blogPage, dashboardPage } from '@/utils/constants';
 import { useState, useEffect, useContext } from 'react';
 import { ThemeContext } from '@/context/theme-provider';
 import { usePathname, useRouter } from 'next/navigation';
@@ -65,11 +65,19 @@ const Navbar = () => {
             {pathname === '/blog' && <SearchBox />}
             {isLogin && (
               <>
-                <NavLink
-                  href="/dashboard?search=&pageNumber=1"
-                  title={`(${userInfo?.name})`}
-                  pathname={pathname}
-                />
+                {userInfo.isAdmin ? (
+                  <NavLink
+                    href={`${dashboardPage}`}
+                    title={`(${userInfo?.name})`}
+                    pathname={pathname}
+                  />
+                ) : (
+                  <NavLink
+                    href={`${blogPage}`}
+                    title={`(${userInfo?.name})`}
+                    pathname={pathname}
+                  />
+                )}
                 <NavLink
                   href=""
                   title="Logout"
@@ -110,6 +118,7 @@ const Navbar = () => {
         <MenuOverlay
           isLogin={isLogin}
           username={userInfo?.name}
+          isAdmin={userInfo?.isAdmin}
           links={navLinks}
           pathname={pathname}
           onClick={handleLogout}

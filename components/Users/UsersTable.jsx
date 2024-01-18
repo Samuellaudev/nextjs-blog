@@ -1,7 +1,7 @@
 import { formatDate } from '@/utils/helpers';
 import styles from './usersTableStyles.module.css';
 
-const UsersTable = ({ usersData }) => {
+const UsersTable = ({ usersData = [] }) => {
   const tableHeadName = ['Name', 'Id', 'Creation Date', 'Verified', 'Premium'];
 
   const TableHead = () => (
@@ -46,7 +46,7 @@ const UsersTable = ({ usersData }) => {
 
   const TableBody = () => (
     <tbody className="text-center bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-      {usersData.map((user) => (
+      {usersData?.map((user) => (
         <tr key={user._id}>
           <td className={`${styles.item_style} dark:text-gray-300`}>
             {user.name}
