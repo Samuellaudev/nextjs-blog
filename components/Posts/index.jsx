@@ -67,7 +67,7 @@ const Posts = ({ pageHeading }) => {
             onClick={handleAddNewPost}
             className={`${styles.light_theme_add_new_btn} dark:hover:bg-white dark:hover:text-black`}
           >
-            + Add new
+            + <span className="hidden md:inline">Add new</span>
           </button>
         )}
         {pageHeading === 'Latest Posts' && search.length > 0 && (
@@ -75,7 +75,7 @@ const Posts = ({ pageHeading }) => {
             onClick={() => router.push('/blog?search=&pageNumber=1')}
             className={`${styles.light_theme_back_btn} dark:border dark:border-white dark:hover:bg-white dark:hover:text-black`}
           >
-            <span className="hidden md:inline">&larr; </span>Back
+            &larr; <span className="hidden md:inline">Back</span>
           </button>
         )}
       </div>

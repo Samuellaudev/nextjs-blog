@@ -39,7 +39,7 @@ const Paginate = ({ pages, page, pageType, search = '' }) => {
   };
 
   return (
-    <div className="flex items-center mt-8">
+    <div className="flex items-center mt-8 mb-16 justify-center">
       <PaginationLink
         arrowType="left"
         page={page}

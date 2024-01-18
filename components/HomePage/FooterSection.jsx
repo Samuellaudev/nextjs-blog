@@ -51,15 +51,6 @@ const FooterSection = () => {
         <p className="">&copy;2023 Samuel Lau. All right reserved.</p>
         <div className="flex flex-col justify-center items-center">
           {renderSocialLinks()}
-          <iframe
-            src={`https://status.samuellau.dev/badge?theme=${resolvedTheme}`}
-            width="190"
-            height="30"
-            frameBorder="0"
-            scrolling="no"
-            style={iframeStyle}
-            className="bg-white dark:bg-black"
-          />
         </div>
       </div>
     </footer>

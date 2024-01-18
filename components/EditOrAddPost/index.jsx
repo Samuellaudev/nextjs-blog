@@ -166,7 +166,7 @@ const EditOrAddNewPost = ({ postType }) => {
                 onClick={() => router.back()}
                 className={`${styles.light_theme_back_btn} dark:hover:bg-white dark:hover:text-black`}
               >
-                <span className="hidden md:inline">&larr; </span>Back
+                &larr; <span className="hidden md:inline">Back</span>
               </button>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col">
@@ -210,7 +210,7 @@ const EditOrAddNewPost = ({ postType }) => {
                 className={`${styles.light_theme_form} dark:text-white dark:bg-[#18191E] dark:border-[#33353F]`}
                 required
               />
-              <label htmlFor="body" className="mt-4 mb-2 text-lg">
+              <label htmlFor="body" className="mt-10 text-lg">
                 <b>Content</b>
               </label>
               <div className={styles.post__body}>
