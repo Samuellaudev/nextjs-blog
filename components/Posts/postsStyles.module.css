@@ -1,4 +1,4 @@
-.articles__heading {
+.tabs__heading {
   margin-top: 4rem;
   font-weight: 400;
   font-size: 2rem;
@@ -34,6 +34,10 @@
 }
 
 /* Dashboard */
+.dashboard {
+  @apply mt-0 md:mt-16
+}
+
 .light_theme_add_new_btn,
 .light_theme_back_btn {
   @apply border p-2 px-6 hover:bg-black hover:text-white transition duration-200;
