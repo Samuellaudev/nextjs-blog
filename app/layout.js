@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from '@/context/theme-provider';
 import { poppins } from '@/components/fonts';
 import Navbar from '@/components/Navbar';
@@ -7,7 +8,7 @@ import '@/css/globals.css';
 import style from './homePage.module.css';
 
 export const metadata = {
-  title: 'Samuel Lau: Web Development',
+  title: 'Next.js Blog By samuellau.dev',
   description: 'Everything about web development',
 };
 
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
             <FooterSection />
           </main>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
