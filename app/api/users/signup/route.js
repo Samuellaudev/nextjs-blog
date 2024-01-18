@@ -43,7 +43,7 @@ export async function POST(request) {
     }
 
     if (user) {
-      generateToken(user._id, user.isVerified);
+      generateToken(user._id, user.isVerified, user.isAdmin);
 
       const newUser = {
         _id: user._id,

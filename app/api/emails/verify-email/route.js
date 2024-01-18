@@ -24,7 +24,7 @@ export async function PUT(request) {
 
     const updatedUser = await user.save();
 
-    generateToken(updatedUser._id, updatedUser.isVerified);
+    generateToken(updatedUser._id, updatedUser.isVerified, updatedUser.isAdmin);
 
     return NextResponse.json({
       status: 200,

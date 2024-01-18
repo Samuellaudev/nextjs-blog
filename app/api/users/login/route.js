@@ -14,7 +14,7 @@ export async function POST(request) {
     const passwordEntered = await user.matchPassword(password);
 
     if (user && passwordEntered) {
-      generateToken(user._id, user.isVerified);
+      generateToken(user._id, user.isVerified, user.isAdmin);
 
       return NextResponse.json({
         status: 200,

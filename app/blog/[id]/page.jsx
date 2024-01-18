@@ -76,7 +76,7 @@ const Post = ({ params }) => {
               onClick={() => router.back()}
               className={`${styles.light_theme_back_btn} dark:hover:bg-white dark:hover:text-black`}
             >
-              <span className="hidden md:inline">&larr; </span>Back
+              &larr; <span className="hidden md:inline">Back</span>
             </button>
           </div>
           <p className={styles.post__date}>
