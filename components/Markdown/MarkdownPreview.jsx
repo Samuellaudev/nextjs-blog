@@ -9,6 +9,7 @@ const MarkdownPreview = ({
   input,
   setInput,
   handleInputChange,
+  extraClass,
 }) => {
   const renderCodeBlock = ({ className, ...rest }) => {
     const match = /language-(\w+)/.exec(className || '');
@@ -49,7 +50,7 @@ const MarkdownPreview = ({
       <Markdown
         className={`${
           isEdit ? 'mt-2 md:mt-0 md:w-6/12 md:p-2 border' : `w-full`
-        } 
+        } ${extraClass}
         h-auto`}
         components={{ code: renderCodeBlock }}
       >

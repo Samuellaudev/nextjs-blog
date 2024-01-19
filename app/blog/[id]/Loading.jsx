@@ -5,7 +5,7 @@ const Loading = () => {
     <div className="rounded-md w-full mx-auto">
       <div className="animate-pulse flex px-2">
         <div className="flex-1 space-y-6 py-1">
-          <div className="h-[300px] w-auto bg-slate-700 rounded"></div>
+          <div className="h-[200px] w-auto bg-slate-700 rounded"></div>
           <div className="h-10 w-[300px] bg-slate-700 rounded-full"></div>
           <div className="h-5 w-[150px] bg-slate-700 rounded-full"></div>
           <div className="space-y-3">

@@ -242,10 +242,14 @@ const Posts = ({ pageHeading }) => {
                       </p>
                     </div>
                     {pageHeading === 'Latest Posts' && (
-                      <p className={styles.article_list__date}>
-                        {formatDate(post.updatedAt)}
-                        <span className="">{readingTime(post?.body)}</span>
-                      </p>
+                      <div className="flex flex-col text-left md:text-right">
+                        <p className={styles.article_list__date}>
+                          {formatDate(post.updatedAt)}
+                        </p>
+                        <p className={styles.article_reading_time}>
+                          {readingTime(post?.body)}
+                        </p>
+                      </div>
                     )}
                   </Link>
                 </li>

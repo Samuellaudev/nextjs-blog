@@ -23,6 +23,32 @@
   margin: 2rem 0rem;
 }
 
+.blurred__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.blurred__container::before {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  backdrop-filter: blur(5px);
+}
+
+.markdownBody {
+  position: relative;
+  z-index: 1;
+  padding: 2px;
+  user-select: none;
+  pointer-events: none;
+}
+
+
 @media only screen and (min-width: 768px) {
   .articles__heading {
     margin-top: 3rem;

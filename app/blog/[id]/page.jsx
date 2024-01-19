@@ -1,7 +1,8 @@
 'use client';
 
 import { POSTS_URL, AWS_S3_GET_URL } from '@/utils/constants';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
+import { ThemeContext } from '@/context/theme-provider';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import axios from 'axios';
@@ -19,6 +20,9 @@ const Post = ({ params }) => {
   });
   const [imgLink, setImgLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const { userInfo } = useContext(ThemeContext);
+  const isVerified = userInfo && userInfo.isVerified;
 
   const router = useRouter();
 
@@ -83,8 +87,16 @@ const Post = ({ params }) => {
             {formatDate(post?.createdAt)}
             <p className="">{readingTime(post?.body)}</p>
           </p>
-          <div className={styles.post__body}>
-            <MarkdownPreview post={post.body} isEdit={false} />
+          <div
+            className={`${styles.post__body} ${
+              !isVerified ? styles.blurred__container : ''
+            }`}
+          >
+            <MarkdownPreview
+              post={post.body}
+              isEdit={false}
+              extraClass={`${styles.markdownBody}`}
+            />
           </div>
         </>
       )}
