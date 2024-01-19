@@ -7,11 +7,12 @@ const PaginationLink = ({ arrowType, page, pages, pageType, search = '' }) => {
       {arrowType === 'left' && (
         <Link
           href={`/${pageType}?search=${search}&pageNumber=${page - 1 || 1}`}
-          disabled={page - 1 === 0}
+          aria-disabled={page - 1 === 0}
+          tabIndex={page - 1 === 0 ? -1 : undefined}
           className={`${styles.normal_arrow} dark:bg-gray-800
           ${
             page - 1 === 0
-              ? 'cursor-not-allowed dark:text-gray-600'
+              ? 'pointer-events-none cursor-not-allowed dark:text-gray-600'
               : styles.more_pages
           } `}
         >
@@ -32,11 +33,12 @@ const PaginationLink = ({ arrowType, page, pages, pageType, search = '' }) => {
       {arrowType === 'right' && (
         <Link
           href={`/${pageType}?search=${search}&pageNumber=${page + 1 || pages}`}
-          disabled={pages - page === 0}
+          aria-disabled={pages - page === 0}
+          tabIndex={pages - page === 0 ? -1 : undefined}
           className={`${styles.normal_arrow}  dark:bg-gray-800
           ${
             pages - page === 0
-              ? 'cursor-not-allowed dark:text-gray-600'
+              ? 'pointer-events-none cursor-not-allowed dark:text-gray-600'
               : styles.more_pages
           } `}
         >
