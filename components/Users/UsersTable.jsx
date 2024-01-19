@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { formatDate } from '@/utils/helpers';
 import styles from './usersTableStyles.module.css';
-import { StatusIndicator } from '@/utils/helpers';
 
 const UsersTable = ({ usersData = [] }) => {
   const [data, setData] = useState([]);
@@ -29,23 +28,83 @@ const UsersTable = ({ usersData = [] }) => {
     </thead>
   );
 
-  const renderVerificationStatus = (isVerified) => (
-    <StatusIndicator
-      status="verification"
-      isTrue={isVerified}
-      trueColor="emerald-500"
-      falseColor="red-500"
-    />
-  );
+  const renderVerificationStatus = (isVerified) =>
+    isVerified ? (
+      <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10 3L4.5 8.5L2 6"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+    ) : (
+      <div class="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 3L3 9M3 3L9 9"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    );
 
-  const renderPremiumStatus = (isPremium) => (
-    <StatusIndicator
-      status="premium"
-      isTrue={isPremium}
-      trueColor="emerald-500"
-      falseColor="red-500"
-    />
-  );
+  const renderPremiumStatus = (isPremium) =>
+    isPremium ? (
+      <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M10 3L4.5 8.5L2 6"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+    ) : (
+      <div class="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M9 3L3 9M3 3L9 9"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </div>
+    );
 
   const TableBody = () => (
     <tbody className="text-center bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">

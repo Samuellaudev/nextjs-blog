@@ -97,6 +97,23 @@ const Post = ({ params }) => {
               isEdit={false}
               extraClass={`${styles.markdownBody}`}
             />
+            {!isVerified ? (
+              <div className="absolute text-center bg-white text-black p-4 w-80 rounded-md left-0 md:right-0 mx-auto bottom-1/3 z-10 ring-offset-2 ring-4 ring-gray-200">
+                <p className="text-2xl font-semibold">Login</p>
+                <p className="my-4 mb-8 text-gray-500">
+                  Access premium content by logging in to your account.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => router.push('/login')}
+                  className="border rounded-md p-2 w-full bg-cyan-700 text-white hover:bg-white hover:text-cyan-700 transition duration-200"
+                >
+                  Login
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </>
       )}
