@@ -1,5 +1,5 @@
 'use client';
-import { USERS_URL, blogPage } from '@/utils/constants';
+import { USERS_URL, blogPage, dashboardPage } from '@/utils/constants';
 import { useEffect, useState, useContext } from 'react';
 import { ThemeContext } from '@/context/theme-provider';
 import axios from 'axios';
@@ -41,7 +41,12 @@ const Login = () => {
       setUserInfo(data);
 
       localStorage.setItem('isLogin', true);
-      router.push(`${blogPage}`);
+
+      if (data.isAdmin) {
+        router.push(`${dashboardPage}`);
+      } else {
+        router.push(`${blogPage}`);
+      }
     } catch (error) {
       console.error('Login error:', error);
     }

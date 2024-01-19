@@ -31,6 +31,9 @@ export async function POST(request) {
       });
     }
   } catch (error) {
-    return NextResponse.json({ error });
+    return NextResponse.json({
+      status: 401,
+      message: 'Sorry! There was an error with your login. Please try again.',
+    });
   }
 }
