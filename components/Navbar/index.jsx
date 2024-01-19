@@ -62,7 +62,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="desktop-menu hidden md:block md:w-auto" id="navbar">
           <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 mt-0 items-center">
-            {pathname === '/blog' && <SearchBox />}
+            {pathname.includes('/blog') && <SearchBox />}
             {isLogin && (
               <>
                 {userInfo.isAdmin ? (
@@ -100,7 +100,7 @@ const Navbar = () => {
         </div>
         {/* Mobile Menu */}
         <div className="mobile-menu md:hidden flex items-center">
-          {pathname === '/blog' && (
+          {pathname.includes('/blog') && (
             <div className="mr-4">
               <SearchBox isMobile={true} />
             </div>

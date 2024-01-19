@@ -21,6 +21,7 @@ export const socialLinks = [
 export const navLinks = [
   { title: 'Home', path: '/' },
   { title: 'Blog', path: '/blog?search=&pageNumber=1' },
+  { title: 'Login', path: '/login' },
   { title: 'Contact', path: '/contact' },
 ];
 
