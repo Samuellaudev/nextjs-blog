@@ -1,13 +1,22 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { formatDate } from '@/utils/helpers';
 import styles from './usersTableStyles.module.css';
+import { StatusIndicator } from '@/utils/helpers';
 
 const UsersTable = ({ usersData = [] }) => {
+  const [data, setData] = useState([]);
   const tableHeadName = ['Name', 'Id', 'Creation Date', 'Verified', 'Premium'];
+
+  useEffect(() => {
+    setData(usersData);
+  }, [usersData]);
 
   const TableHead = () => (
     <thead className="bg-gray-50 dark:bg-gray-800">
       <tr>
-        {tableHeadName.map((item) => (
+        {tableHeadName?.map((item) => (
           <th
             key={item}
             scope="col"
@@ -21,108 +30,45 @@ const UsersTable = ({ usersData = [] }) => {
   );
 
   const renderVerificationStatus = (isVerified) => (
-    <td className={`${styles.item_style} dark:text-gray-300`}>
-      {isVerified ? (
-        <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M10 3L4.5 8.5L2 6"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-      ) : (
-        <div class="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9 3L3 9M3 3L9 9"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-      )}
-    </td>
+    <StatusIndicator
+      status="verification"
+      isTrue={isVerified}
+      trueColor="emerald-500"
+      falseColor="red-500"
+    />
   );
 
   const renderPremiumStatus = (isPremium) => (
-    <td className={`${styles.item_style} dark:text-gray-300`}>
-      {isPremium ? (
-        <div className="inline-flex items-center px-3 py-1 rounded-full gap-x-2 text-emerald-500 bg-emerald-100/60 dark:bg-gray-800">
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M10 3L4.5 8.5L2 6"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-      ) : (
-        <div class="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 12 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9 3L3 9M3 3L9 9"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-      )}
-    </td>
+    <StatusIndicator
+      status="premium"
+      isTrue={isPremium}
+      trueColor="emerald-500"
+      falseColor="red-500"
+    />
   );
 
   const TableBody = () => (
     <tbody className="text-center bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-      {usersData?.map((user) => (
-        <tr key={user._id}>
-          <td className={`${styles.item_style} dark:text-gray-300`}>
-            {user.name}
-          </td>
-          <td className={`${styles.item_style} dark:text-gray-300`}>
-            {user._id}
-          </td>
-          <td className={`${styles.item_style} dark:text-gray-300`}>
-            {formatDate(user.createdAt)}
-          </td>
-          {renderVerificationStatus(user.isVerified)}
-          <td className={`${styles.item_style} dark:text-gray-300`}>
-            {renderPremiumStatus(user.isPremium)}
-          </td>
-        </tr>
-      ))}
+      {data.length > 0 &&
+        data?.map((user) => (
+          <tr key={user._id}>
+            <td className={`${styles.item_style} dark:text-gray-300`}>
+              {user.name}
+            </td>
+            <td className={`${styles.item_style} dark:text-gray-300`}>
+              {user._id}
+            </td>
+            <td className={`${styles.item_style} dark:text-gray-300`}>
+              {formatDate(user.createdAt)}
+            </td>
+            <td className={`${styles.item_style} dark:text-gray-300`}>
+              {renderVerificationStatus(user.isVerified)}
+            </td>
+            <td className={`${styles.item_style} dark:text-gray-300`}>
+              {renderPremiumStatus(user.isPremium)}
+            </td>
+          </tr>
+        ))}
     </tbody>
   );
 

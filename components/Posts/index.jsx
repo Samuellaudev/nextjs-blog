@@ -86,15 +86,16 @@ const Posts = ({ pageHeading }) => {
             <h1 className={`${styles.tabs__heading} ${styles.dashboard}`}>
               {pageHeading}
             </h1>
-            <button
-              type="button"
+            <div
+              role="button"
+              aria-label="Add new post"
               onClick={handleAddNewPost}
               className={`${selectedIndex === 1 ? 'block' : 'hidden'} ${
                 styles.light_theme_add_new_btn
               } dark:hover:bg-white dark:hover:text-black`}
             >
               + <span className="hidden md:inline">Add new</span>
-            </button>
+            </div>
           </>
         )}
         {pageHeading === 'Latest Posts' && search.length > 0 && (
