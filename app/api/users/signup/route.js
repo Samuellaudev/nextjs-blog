@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import { USERS_URL } from '@/utils/constants';
 import User from '@/models/userModel.js';
 import { v4 as uuid } from 'uuid';
 import sendEmail from '@/utils/sendEmail.js';
@@ -50,6 +49,7 @@ export async function POST(request) {
         name: user.name,
         email: user.email,
         isVerified: user.isVerified,
+        isPremium: user.isPremium,
         isAdmin: user.isAdmin,
         verificationString: user.verificationString,
       };

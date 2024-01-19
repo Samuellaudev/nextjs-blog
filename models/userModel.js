@@ -26,6 +26,11 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
+    isPremium: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     verificationString: {
       type: String,
       default: '',
@@ -37,6 +42,9 @@ const userSchema = new mongoose.Schema(
   },
   {
     timestamps: true, // Adds 'createdAt' and 'updatedAt' timestamps to the user model
+  },
+  {
+    strict: true,
   },
 );
 

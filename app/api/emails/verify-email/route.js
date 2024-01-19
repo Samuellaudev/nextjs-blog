@@ -33,6 +33,7 @@ export async function PUT(request) {
         name: updatedUser.name,
         email: updatedUser.email,
         isVerified: updatedUser.isVerified,
+        isPremium: updatedUser.isPremium,
         isAdmin: updatedUser.isAdmin,
       },
     });

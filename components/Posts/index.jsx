@@ -208,12 +208,12 @@ const Posts = ({ pageHeading }) => {
           tab2={DashboardOrPosts}
           tab1Class={`mr-1 md:mr-4 ${
             selectedIndex === 0
-              ? 'text-white focus:outline-none'
+              ? 'text-[#565b5f] dark:text-white focus:outline-none'
               : 'text-[#ADB7BE]'
           }`}
           tab2Class={`w-full ${
             selectedIndex === 1
-              ? 'text-white focus:outline-none'
+              ? 'text-[#565b5f] dark:text-white focus:outline-none'
               : 'text-[#ADB7BE]'
           }`}
           content1={UsersPanel}

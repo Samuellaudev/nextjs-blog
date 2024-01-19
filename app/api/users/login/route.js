@@ -22,6 +22,7 @@ export async function POST(request) {
         name: user.name,
         email: user.email,
         isVerified: user.isVerified,
+        isPremium: user.isPremium,
         isAdmin: user.isAdmin,
       });
     } else {
