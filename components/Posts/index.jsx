@@ -1,5 +1,5 @@
 'use client';
-import { POSTS_URL, USERS_URL, blogPage } from '@/utils/constants';
+import { POSTS_URL, blogPage } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
@@ -14,7 +14,6 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const Posts = ({ pageHeading }) => {
   const [postsData, setPostsData] = useState({ page: 1, pages: 1, posts: [] });
-  const [usersData, setUsersData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
@@ -39,28 +38,9 @@ const Posts = ({ pageHeading }) => {
     }
   };
 
-  const fetchUsers = async () => {
-    setIsLoading(true);
-    try {
-      const response = await axios.get(`${USERS_URL}`);
-      const usersData = await response.data;
-
-      setUsersData(usersData);
-      setIsLoading(false);
-    } catch (error) {
-      console.error('Error fetching users:', error);
-    }
-  };
-
   useEffect(() => {
     fetchPosts();
   }, [search, pageNumber]);
-
-  useEffect(() => {
-    if (selectedIndex === 0) {
-      fetchUsers();
-    }
-  }, [selectedIndex]);
 
   const handleAddNewPost = () => router.push('/new-post');
 
@@ -78,7 +58,7 @@ const Posts = ({ pageHeading }) => {
     }
   };
 
-  const DashboardOrPosts = () => {
+  const DashboardOrPostsTab = () => {
     return (
       <div className="flex flex-row items-baseline justify-between">
         {pageHeading === 'Dashboard' && (
@@ -113,11 +93,9 @@ const Posts = ({ pageHeading }) => {
     );
   };
 
-  const Users = () => <h1 className={`${styles.tabs__heading} `}>Users</h1>;
+  const UsersTab = () => <h1 className={`${styles.tabs__heading} `}>Users</h1>;
 
-  const UsersPanel = () => {
-    return <UsersTable usersData={usersData} />;
-  };
+  const UsersPanel = () => <UsersTable />;
 
   const DashboardPanel = () => {
     return isLoading ? (
@@ -156,7 +134,7 @@ const Posts = ({ pageHeading }) => {
               </Link>
               {pageHeading === 'Dashboard' && (
                 <div className="flex flex-row justify-between">
-                  <div className="flex flex-col md:flex-row text-xs md:text-sm space-y-2 md:space-x-4 mb-4 items-center">
+                  <div className="flex flex-col md:flex-row text-xs md:text-sm space-y-2 md:space-y-0 md:space-x-4 mb-4 items-center">
                     {post.isPremium ? (
                       <span className="bg-secondary-700 p-1 px-3 rounded-full text-white">
                         Premium
@@ -223,8 +201,8 @@ const Posts = ({ pageHeading }) => {
         // Render Tabs and Content based on the pageHeading
         <Tabs
           tabListClass={`flex flex-col  md:flex-row items-start`}
-          tab1={Users}
-          tab2={DashboardOrPosts}
+          tab1={UsersTab}
+          tab2={DashboardOrPostsTab}
           tab1Class={`mr-1 md:mr-4 ${
             selectedIndex === 0
               ? 'text-[#565b5f] dark:text-white focus:outline-none'

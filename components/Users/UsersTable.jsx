@@ -1,16 +1,34 @@
 'use client';
 
+import { USERS_URL } from '@/utils/constants';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { formatDate } from '@/utils/helpers';
 import styles from './usersTableStyles.module.css';
+import Loading from './Loading';
 
-const UsersTable = ({ usersData = [] }) => {
-  const [data, setData] = useState([]);
+const UsersTable = () => {
+  const [usersData, setUsersData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
   const tableHeadName = ['Name', 'Id', 'Creation Date', 'Verified', 'Premium'];
 
+  const fetchUsers = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(`${USERS_URL}`);
+      const usersData = await response.data;
+
+      setUsersData(usersData);
+      setIsLoading(false);
+    } catch (error) {
+      console.error('Error fetching users:', error);
+    }
+  };
+
   useEffect(() => {
-    setData(usersData);
-  }, [usersData]);
+    fetchUsers();
+  }, []);
 
   const TableHead = () => (
     <thead className="bg-gray-50 dark:bg-gray-800">
@@ -108,9 +126,9 @@ const UsersTable = ({ usersData = [] }) => {
 
   const TableBody = () => (
     <tbody className="text-center bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-      {data &&
-        data.length > 0 &&
-        data?.map((user) => (
+      {usersData &&
+        usersData.length > 0 &&
+        usersData?.map((user) => (
           <tr key={user._id}>
             <td className={`${styles.item_style} dark:text-gray-300`}>
               {user.name}
@@ -132,11 +150,13 @@ const UsersTable = ({ usersData = [] }) => {
     </tbody>
   );
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <section className="container mx-auto mt-6">
       <div className="flex flex-col">
         <div className="overflow-x-auto">
-          <div className="inline-block min-w-full py-2 align-middle ">
+          <div className="inline-block min-w-full py-2 align-middle">
             <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                 <TableHead />
