@@ -5,7 +5,20 @@ export const readingTime = (body) =>
     emoji: 'open_book',
   });
 
-export const formatDate = (date) => new Date(date).toDateString();
+export const formatDate = (date) => {
+  let dateObject = new Date(date);
+
+  if (isNaN(dateObject.getTime())) {
+    console.error('Invalid date:', date);
+    return null;
+  }
+
+  return dateObject.toLocaleDateString(undefined, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+};
 
 export const modifiedImageName = (id, imageName) => {
   return `${id}&img=${imageName}`;

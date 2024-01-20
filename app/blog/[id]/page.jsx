@@ -4,9 +4,9 @@ import { POSTS_URL, AWS_S3_GET_URL } from '@/utils/constants';
 import { useEffect, useState, useContext } from 'react';
 import { ThemeContext } from '@/context/theme-provider';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
 import axios from 'axios';
 import { readingTime, formatDate } from '@/utils/helpers';
+import S3Image from '@/components/AWS/S3Image';
 import MarkdownPreview from '@/components/Markdown/MarkdownPreview';
 import Loading from './Loading';
 import styles from './postStyles.module.css';
@@ -18,24 +18,12 @@ const Post = ({ params }) => {
     createdAt: '',
     image: {},
   });
-  const [imgLink, setImgLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const { userInfo } = useContext(ThemeContext);
   const isVerified = userInfo && userInfo.isVerified;
 
   const router = useRouter();
-
-  const retrieveImage = async (imageName) => {
-    try {
-      const res = await axios.get(`${AWS_S3_GET_URL}/${imageName}`);
-      const { url } = res.data;
-
-      setImgLink(url);
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -44,7 +32,6 @@ const Post = ({ params }) => {
         const response = await axios.get(`${POSTS_URL}/${params.id}`);
         const postData = response.data;
 
-        await retrieveImage(postData?.image?.name);
         setPost(postData);
         setIsLoading(false);
       } catch (error) {
@@ -61,19 +48,12 @@ const Post = ({ params }) => {
         <Loading />
       ) : (
         <>
-          {imgLink ? (
-            <div className="mb-6">
-              <Image
-                src={imgLink}
-                alt="post image"
-                width={650}
-                height={650}
-                className="rounded-md mx-auto"
-              />
-            </div>
-          ) : (
-            <></>
-          )}
+          <div className="mb-6">
+            <S3Image
+              imageName={post?.image?.name}
+              className="rounded-md mx-auto"
+            />
+          </div>
           <div className="flex flex-row justify-between items-start">
             <h1 className={styles.post__title}>{post.title}</h1>
             <button
