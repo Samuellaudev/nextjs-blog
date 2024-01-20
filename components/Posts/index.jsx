@@ -156,7 +156,7 @@ const Posts = ({ pageHeading }) => {
               </Link>
               {pageHeading === 'Dashboard' && (
                 <div className="flex flex-row justify-between">
-                  <div className="flex text-xs md:text-sm space-x-2 md:space-x-4 mb-4 items-center">
+                  <div className="flex flex-col md:flex-row text-xs md:text-sm space-y-2 md:space-x-4 mb-4 items-center">
                     {post.isPremium ? (
                       <span className="bg-secondary-700 p-1 px-3 rounded-full text-white">
                         Premium

@@ -3,6 +3,8 @@ import User from '@/models/userModel.js';
 import connectDB from '@/lib/db';
 import verifyIsAdmin from '@/utils/verifyIsAdmin';
 
+export const dynamic = 'force-dynamic';
+
 // @desc   Fetch all users
 // @route  GET /api/users
 // @access Private/Admin
