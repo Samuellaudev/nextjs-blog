@@ -58,7 +58,8 @@ export async function DELETE(request, { params }) {
 export async function PUT(request, { params }) {
   const { id } = params;
   const updatedData = await request.json();
-  const { title, body, description, image } = updatedData;
+  const { title, body, description, image, isPremium, isFeatured } =
+    updatedData;
 
   try {
     const response = await verifyToken();
@@ -77,6 +78,8 @@ export async function PUT(request, { params }) {
       post.body = body || post.body;
       post.description = description || post.description;
       post.image = image || post.image;
+      post.isPremium = isPremium || post.isPremium;
+      post.isFeatured = isFeatured || post.isFeatured;
       post.updatedAt = Date.now();
 
       await post.save();

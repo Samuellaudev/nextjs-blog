@@ -48,7 +48,7 @@ const UsersTable = ({ usersData = [] }) => {
         </svg>
       </div>
     ) : (
-      <div class="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
+      <div className="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
         <svg
           width="12"
           height="12"
@@ -59,9 +59,9 @@ const UsersTable = ({ usersData = [] }) => {
           <path
             d="M9 3L3 9M3 3L9 9"
             stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </div>
@@ -87,7 +87,7 @@ const UsersTable = ({ usersData = [] }) => {
         </svg>
       </div>
     ) : (
-      <div class="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
+      <div className="inline-flex items-center px-3 py-1 text-red-500 rounded-full gap-x-2 bg-red-100/60 dark:bg-gray-800">
         <svg
           width="12"
           height="12"
@@ -98,9 +98,9 @@ const UsersTable = ({ usersData = [] }) => {
           <path
             d="M9 3L3 9M3 3L9 9"
             stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </div>
@@ -108,7 +108,8 @@ const UsersTable = ({ usersData = [] }) => {
 
   const TableBody = () => (
     <tbody className="text-center bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-      {data.length > 0 &&
+      {data &&
+        data.length > 0 &&
         data?.map((user) => (
           <tr key={user._id}>
             <td className={`${styles.item_style} dark:text-gray-300`}>

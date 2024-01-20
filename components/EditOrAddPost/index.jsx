@@ -20,6 +20,8 @@ const EditOrAddNewPost = ({ postType }) => {
   const [body, setBody] = useState('');
   const [description, setDescription] = useState('');
   const [image, setImage] = useState({});
+  const [isPremium, setIsPremium] = useState(false);
+  const [isFeatured, setIsFeatured] = useState(false);
 
   const router = useRouter();
   const params = useParams();
@@ -39,12 +41,15 @@ const EditOrAddNewPost = ({ postType }) => {
         try {
           const response = await axios.get(`${POSTS_URL}/${params.id}`);
           const { data: postData } = response;
-          const { title, body, description, image } = postData;
+          const { title, body, description, image, isPremium, isFeatured } =
+            postData;
 
           setTitle(title);
           setBody(body);
           setDescription(description);
           setImage(image);
+          setIsPremium(isPremium);
+          setIsFeatured(isFeatured);
         } catch (error) {
           console.error('Error fetching post:', error);
         }
@@ -117,6 +122,8 @@ const EditOrAddNewPost = ({ postType }) => {
           type: image?.type,
           lastModified: image?.lastModified,
         },
+        isPremium,
+        isFeatured,
       };
 
       if (isFormInvalid(postData)) {
@@ -155,7 +162,8 @@ const EditOrAddNewPost = ({ postType }) => {
       toast.error(fieldMap[postType].errorMessage);
     }
   };
-
+  console.log('isPremium', isPremium);
+  console.log('isFeatured', isFeatured);
   return (
     <main className="flex min-h-screen flex-col">
       <div
@@ -175,6 +183,34 @@ const EditOrAddNewPost = ({ postType }) => {
               </button>
             </div>
             <form onSubmit={handleSubmit} className="flex flex-col">
+              <div className="space-x-4 mt-8">
+                <label
+                  htmlFor="isPremiumCheckbox"
+                  className="mt-10 mb-2 text-lg font-bold"
+                >
+                  <input
+                    name="isPremiumCheckbox"
+                    type="checkbox"
+                    checked={isPremium}
+                    onChange={() => setIsPremium(!isPremium)}
+                    className="mr-2"
+                  />
+                  Premium Post
+                </label>
+                <label
+                  htmlFor="isFeaturedCheckbox"
+                  className="mt-10 mb-2 text-lg font-bold"
+                >
+                  <input
+                    name="isFeaturedCheckbox"
+                    type="checkbox"
+                    checked={isFeatured}
+                    onChange={() => setIsFeatured(!isFeatured)}
+                    className="mr-2"
+                  />
+                  Featured Post
+                </label>
+              </div>
               <label htmlFor="image" className="mt-10 mb-2 text-lg">
                 <b>Image</b>
               </label>
@@ -189,7 +225,7 @@ const EditOrAddNewPost = ({ postType }) => {
                 label="Choose File"
                 accept="image/*"
                 onChange={(e) => handleImageChange(e)}
-                className="w-auto md:w-[24rem]"
+                className="mt-2 w-auto md:w-[24rem]"
               />
               <label htmlFor="title" className="mt-10 mb-2 text-lg">
                 <b>Title</b>

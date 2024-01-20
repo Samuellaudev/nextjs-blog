@@ -155,21 +155,39 @@ const Posts = ({ pageHeading }) => {
                 )}
               </Link>
               {pageHeading === 'Dashboard' && (
-                <div className="flex flex-row justify-end">
-                  <button
-                    type="button"
-                    onClick={() => handleEditPost(post._id)}
-                    className={`${styles.light_theme_btn} bg-cyan-700 hover:text-cyan-700 hover:ring-cyan-700 dark:hover:ring-0`}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleDeletePost(post._id)}
-                    className={`${styles.light_theme_btn} bg-red-500 hover:text-red-500 hover:ring-red-500 dark:hover:ring-0`}
-                  >
-                    Delete
-                  </button>
+                <div className="flex flex-row justify-between">
+                  <div className="flex text-xs md:text-sm space-x-2 md:space-x-4 mb-4 items-center">
+                    {post.isPremium ? (
+                      <span className="bg-secondary-700 p-1 px-3 rounded-full text-white">
+                        Premium
+                      </span>
+                    ) : (
+                      <></>
+                    )}
+                    {post.isFeatured ? (
+                      <span className="bg-primary-400 p-1 px-3 rounded-full text-white">
+                        Featured
+                      </span>
+                    ) : (
+                      <></>
+                    )}
+                  </div>
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => handleEditPost(post._id)}
+                      className={`${styles.light_theme_btn} bg-cyan-700 hover:text-cyan-700 hover:ring-cyan-700 dark:hover:ring-0`}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleDeletePost(post._id)}
+                      className={`${styles.light_theme_btn} bg-red-500 hover:text-red-500 hover:ring-red-500 dark:hover:ring-0`}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               )}
             </li>
@@ -236,11 +254,35 @@ const Posts = ({ pageHeading }) => {
                     href={`/blog/${post._id}`}
                     className="flex flex-row justify-between"
                   >
-                    <div className="post-title">
-                      <p className={styles.article_list__title}>{post.title}</p>
-                      <p className="text-base text-gray-600 dark:text-gray-300">
-                        {post?.description}
-                      </p>
+                    <div className="flex flex-col">
+                      <div className="post-title">
+                        <p className={styles.article_list__title}>
+                          {post.title}
+                        </p>
+                        <p className="mb-2 md:mb-0 text-base text-gray-600 dark:text-gray-300">
+                          {post?.description}
+                        </p>
+                      </div>
+                      {post.isPremium || post.isFeatured ? (
+                        <div className="flex text-xs md:text-sm space-x-2 md:space-x-4 mb-3 md:mb-0 mt-2 md:mt-4 items-center">
+                          {post.isPremium ? (
+                            <span className="bg-secondary-800 p-1 px-3 rounded-full text-white">
+                              Premium
+                            </span>
+                          ) : (
+                            <></>
+                          )}
+                          {post.isFeatured ? (
+                            <span className="bg-primary-500 p-1 px-3 rounded-full text-white">
+                              Featured
+                            </span>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                      ) : (
+                        <></>
+                      )}
                     </div>
                     {pageHeading === 'Latest Posts' && (
                       <div className="flex flex-col text-left md:text-right">

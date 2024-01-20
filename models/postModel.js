@@ -17,6 +17,16 @@ const postSchema = new mongoose.Schema({
     type: Object,
     required: true,
   },
+  isFeatured: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
+  isPremium: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
