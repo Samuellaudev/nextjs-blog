@@ -6,13 +6,17 @@ import Image from 'next/image';
 import axios from 'axios';
 import Loading from './Loading';
 
-const S3Image = ({ imageName, className }) => {
+const S3Image = ({ imageName = '', className }) => {
   const [imgLink, setImgLink] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    setIsLoading(true);
+    if (!imageName) {
+      return;
+    }
+
     const retrieveImage = async () => {
-      setIsLoading(true);
       try {
         const res = await axios.get(`${AWS_S3_GET_URL}/${imageName}`);
         const { url } = res.data;

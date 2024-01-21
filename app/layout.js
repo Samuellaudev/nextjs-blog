@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
               ${style.light_theme} dark:bg-black dark:text-black`}
           >
             <Navbar />
-            <div className="mt-5 md:mt-0">{children}</div>
+            <div className="mt-5 md:mt-0 container mx-auto">{children}</div>
             <FooterSection />
           </main>
         </ThemeProvider>

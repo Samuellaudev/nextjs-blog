@@ -5,11 +5,10 @@ export const readingTime = (body) =>
     emoji: 'open_book',
   });
 
-export const formatDate = (date) => {
+export const formatDate = (date = '') => {
   let dateObject = new Date(date);
 
   if (isNaN(dateObject.getTime())) {
-    console.error('Invalid date:', date);
     return null;
   }
 

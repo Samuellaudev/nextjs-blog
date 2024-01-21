@@ -78,8 +78,8 @@ export async function PUT(request, { params }) {
       post.body = body || post.body;
       post.description = description || post.description;
       post.image = image || post.image;
-      post.isPremium = isPremium || post.isPremium;
-      post.isFeatured = isFeatured || post.isFeatured;
+      post.isPremium = isPremium;
+      post.isFeatured = isFeatured;
       post.updatedAt = Date.now();
 
       await post.save();

@@ -40,15 +40,15 @@ const HeroSection = () => {
         className="relative z-10 object-cover w-full rounded-md h-96 border"
       />
 
-      <div className="relative z-20 max-w-lg p-6 mx-auto -mt-20 bg-white rounded-md dark:bg-gray-900 shadow-md hover:shadow-2xl hover:-translate-y-1 duration-200">
+      <div className="relative z-20 max-w-lg p-6 mx-2 md:mx-auto -mt-20 bg-white rounded-md dark:bg-gray-900 shadow-md  hover:scale-110 hover:shadow-2xl hover:-translate-y-1 duration-200">
         <Link
-          href={`/blog/${featuredPost._id}`}
+          href={`/blog/${featuredPost?._id}`}
           className="font-semibold text-gray-800 hover:underline dark:text-white md:text-xl"
         >
-          {featuredPost.title}
+          {featuredPost?.title}
         </Link>
         <p className="mt-3 text-sm text-gray-500 dark:text-gray-300 md:text-sm">
-          {featuredPost.description}
+          {featuredPost?.description}
         </p>
         <p className="mt-3 text-sm text-primary-500">
           {formatDate(featuredPost?.createdAt)}

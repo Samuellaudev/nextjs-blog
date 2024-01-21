@@ -31,7 +31,7 @@ const BlogSection = () => {
   }, []);
 
   return (
-    <section id="latest-posts" className="text-[#565b5f] dark:text-white pt-20">
+    <section id="latest-posts" className="text-[#565b5f] dark:text-white py-14">
       <h2 className="mb-9 text-3xl md:text-4xl text-[#ADB7BE] dark:text-white text-center">
         <span className="flex items-center">
           <span className="h-px flex-1 bg-[#ADB7BE]"></span>

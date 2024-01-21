@@ -162,8 +162,7 @@ const EditOrAddNewPost = ({ postType }) => {
       toast.error(fieldMap[postType].errorMessage);
     }
   };
-  console.log('isPremium', isPremium);
-  console.log('isFeatured', isFeatured);
+
   return (
     <main className="flex min-h-screen flex-col">
       <div
