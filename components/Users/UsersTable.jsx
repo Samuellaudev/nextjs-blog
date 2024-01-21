@@ -17,7 +17,7 @@ const UsersTable = () => {
     setIsLoading(true);
     try {
       const response = await axios.get(`${USERS_URL}`);
-      const usersData = await response.data;
+      const usersData = response.data;
 
       setUsersData(usersData);
       setIsLoading(false);

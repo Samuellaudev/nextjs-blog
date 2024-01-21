@@ -16,12 +16,16 @@ const Post = ({ params }) => {
     title: '',
     body: '',
     createdAt: '',
+    updatedAt: '',
     image: {},
+    isFeatured: false,
+    isPremium: false,
   });
   const [isLoading, setIsLoading] = useState(false);
 
   const { userInfo } = useContext(ThemeContext);
   const isVerified = userInfo && userInfo.isVerified;
+  const isPremiumUser = userInfo && userInfo.isPremium;
 
   const router = useRouter();
 
@@ -41,6 +45,28 @@ const Post = ({ params }) => {
 
     fetchPost();
   }, [params.id]);
+
+  const checkIsVerified = () => (!isVerified ? styles.blurred__container : '');
+
+  const checkIsPremiumPost = (post) => {
+    if (post.isPremium) {
+      if (isPremiumUser) {
+        return '';
+      } else {
+        return styles.blurred__container;
+      }
+    } else {
+      return '';
+    }
+  };
+
+  const checkIsPremiumUser = () => {
+    if (isPremiumUser) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   return (
     <div className={`${styles.light_theme_post} dark:text-white dark:bg-black`}>
@@ -68,9 +94,9 @@ const Post = ({ params }) => {
             <p className="">{readingTime(post?.body)}</p>
           </p>
           <div
-            className={`${styles.post__body} ${
-              !isVerified ? styles.blurred__container : ''
-            }`}
+            className={`${
+              styles.post__body
+            } ${checkIsVerified()} ${checkIsPremiumPost(post)}`}
           >
             <MarkdownPreview
               post={post.body}
@@ -91,6 +117,27 @@ const Post = ({ params }) => {
                   Login
                 </button>
               </div>
+            ) : (
+              <></>
+            )}
+            {post.isPremium ? (
+              !checkIsPremiumUser() ? (
+                <div className="absolute text-center bg-white text-black p-4 w-80 rounded-md left-0 md:right-0 mx-auto bottom-1/3 z-10 ring-offset-2 ring-4 ring-gray-200">
+                  <p className="text-2xl font-semibold">Login</p>
+                  <p className="my-4 mb-8 text-gray-500">
+                    Access premium content by upgrading to Pro user
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => router.push('/login')}
+                    className="border rounded-md p-2 w-full bg-primary-500 text-white hover:bg-white hover:text-primary-500 transition duration-200"
+                  >
+                    Upgrade
+                  </button>
+                </div>
+              ) : (
+                <></>
+              )
             ) : (
               <></>
             )}
