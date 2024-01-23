@@ -31,12 +31,12 @@ const ResultPage = async ({ searchParams }) => {
         body: JSON.stringify(userId),
       });
     } catch (error) {
-      console.log(error);
+      console.error('Error upgrading user:', error);
     }
   };
 
   if (paymentStatus === 'paid') {
-    upgradeUser();
+    await upgradeUser();
   }
 
   revalidatePath('/checkout/result', 'page');
