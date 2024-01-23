@@ -1,8 +1,11 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+import { USERS_URL } from '@/utils/constants';
 import { stripe } from '@/lib/stripe';
-import User from '@/models/userModel.js';
 import Logout from '@/components/Logout';
+
+const frontendUrl = process.env.FRONTEND_URL;
 
 const ResultPage = async ({ searchParams }) => {
   if (!searchParams.session_id)
@@ -20,14 +23,13 @@ const ResultPage = async ({ searchParams }) => {
 
   const upgradeUser = async () => {
     try {
-      const userExists = await User.findById(userId);
-
-      if (userExists) {
-        userExists.isPremium = true;
-        userExists.updatedAt = Date.now();
-
-        await userExists.save();
-      }
+      const res = await fetch(`${frontendUrl}${USERS_URL}/upgrade`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userId),
+      });
     } catch (error) {
       console.log(error);
     }
@@ -36,6 +38,8 @@ const ResultPage = async ({ searchParams }) => {
   if (paymentStatus === 'paid') {
     upgradeUser();
   }
+
+  revalidatePath('/checkout/result', 'page');
 
   return (
     <div className="container mx-auto text-center flex flex-col px-12 md:mt-20 text-[#565b5f] dark:text-white">
