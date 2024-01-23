@@ -1,3 +1,4 @@
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from '@/context/theme-provider';
 import { poppins } from '@/components/fonts';
@@ -26,6 +27,7 @@ export default function RootLayout({ children }) {
             <FooterSection />
           </main>
         </ThemeProvider>
+        <SpeedInsights />
         <Analytics />
       </body>
     </html>

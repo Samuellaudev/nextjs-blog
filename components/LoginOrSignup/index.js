@@ -18,7 +18,7 @@ const LoginOrSignUp = ({
   return (
     <div className="flex items-center justify-center min-h-screen">
       <form
-        className="flex flex-col p-6 w-[280px] md:w-auto shadow-2xl rounded-2xl md:flex-col md:m-0 text-black bg-white"
+        className="flex flex-col p-6 w-[280px] md:w-auto md:my-40 md:mb-24 shadow-2xl rounded-2xl md:flex-col text-black bg-white"
         onSubmit={handleSubmit}
       >
         <h2 className="font-mono font-bold mb-5 text-center text-4xl text-gray-600">
@@ -78,12 +78,20 @@ const LoginOrSignUp = ({
         )}
         <div className="flex flex-col items-center justify-between mt-4 md:flex-row md:space-x-4">
           {pageType === 'login' && (
-            <Link
-              href="/emails/forgot-password"
-              className="font-thin text-cyan-700 mb-5 md:mb-0"
-            >
-              Forgot password
-            </Link>
+            <div className="flex flex-col">
+              <Link
+                href="/emails/forgot-password"
+                className="font-thin text-center mb-5 md:mb-0 px-2 rounded-md text-cyan-700 hover:bg-cyan-700 hover:text-white transition duration-200"
+              >
+                Forgot password
+              </Link>
+              <Link
+                href="/signup"
+                className="font-thin text-center mb-5 md:mb-0 rounded-md text-primary-700 hover:bg-primary-500 hover:text-white transition duration-200"
+              >
+                Create account
+              </Link>
+            </div>
           )}
           <button
             type="submit"
