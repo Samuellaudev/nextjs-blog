@@ -1,6 +1,6 @@
 'use client';
 
-import { POSTS_URL, AWS_S3_GET_URL } from '@/utils/constants';
+import { POSTS_URL } from '@/utils/constants';
 import { useEffect, useState, useContext } from 'react';
 import { ThemeContext } from '@/context/theme-provider';
 import { useRouter } from 'next/navigation';
@@ -8,6 +8,8 @@ import axios from 'axios';
 import { readingTime, formatDate } from '@/utils/helpers';
 import S3Image from '@/components/AWS/S3Image';
 import MarkdownPreview from '@/components/Markdown/MarkdownPreview';
+import CheckoutForm from '@/components/Stripe/CheckoutForm';
+import { createCheckoutSession } from '@/app/actions/stripe';
 import Loading from './Loading';
 import styles from './postStyles.module.css';
 
@@ -26,6 +28,10 @@ const Post = ({ params }) => {
   const { userInfo } = useContext(ThemeContext);
   const isVerified = userInfo && userInfo.isVerified;
   const isPremiumUser = userInfo && userInfo.isPremium;
+
+  const stripeData = {
+    userId: userInfo?._id,
+  };
 
   const router = useRouter();
 
@@ -50,22 +56,16 @@ const Post = ({ params }) => {
 
   const checkIsPremiumPost = (post) => {
     if (post.isPremium) {
-      if (isPremiumUser) {
-        return '';
-      } else {
-        return styles.blurred__container;
-      }
+      return isPremiumUser ? '' : styles.blurred__container;
     } else {
       return '';
     }
   };
 
+  const checkIsLogin = () => localStorage.getItem('isLogin') !== null;
+
   const checkIsPremiumUser = () => {
-    if (isPremiumUser) {
-      return true;
-    } else {
-      return false;
-    }
+    return isPremiumUser ? <></> : <CheckoutForm data={stripeData} />;
   };
 
   return (
@@ -120,27 +120,7 @@ const Post = ({ params }) => {
             ) : (
               <></>
             )}
-            {post.isPremium ? (
-              !checkIsPremiumUser() ? (
-                <div className="absolute text-center bg-white text-black p-4 w-80 rounded-md left-0 md:right-0 mx-auto bottom-1/3 z-10 ring-offset-2 ring-4 ring-gray-200">
-                  <p className="text-2xl font-semibold">Login</p>
-                  <p className="my-4 mb-8 text-gray-500">
-                    Access premium content by upgrading to Pro user
-                  </p>
-                  <button
-                    type="button"
-                    onClick={() => router.push('/login')}
-                    className="border rounded-md p-2 w-full bg-primary-500 text-white hover:bg-white hover:text-primary-500 transition duration-200"
-                  >
-                    Upgrade
-                  </button>
-                </div>
-              ) : (
-                <></>
-              )
-            ) : (
-              <></>
-            )}
+            {post.isPremium && checkIsLogin() && checkIsPremiumUser()}
           </div>
         </>
       )}
