@@ -6,7 +6,7 @@ A serverless web application that utilizes Next.js and MongoDB to create a custo
 
 ## 🔗 URL
 
-[Next.js CMS Blog](https://nextjs-blog-samuellau.vercel.app/)
+[Next.js CMS Blog](https://nextjs-mongodb-cms.vercel.app/)
 
 ## 🚀 Features
 
