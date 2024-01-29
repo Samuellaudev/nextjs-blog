@@ -48,7 +48,9 @@ const FooterSection = () => {
             className="mb-6 md:mb-0 mx-auto md:mx-0 rounded"
           />
         </Link>
-        <p className="">&copy;2023 Samuel Lau. All right reserved.</p>
+        <p className="">
+          &copy;{new Date().getFullYear()} Samuel Lau. All right reserved.
+        </p>
         <div className="flex flex-col justify-center items-center">
           {renderSocialLinks()}
         </div>
