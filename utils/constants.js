@@ -1,17 +1,17 @@
 // Contact Section
 export const socialLinks = [
   {
-    href: 'https://github.com/samuellaudev',
+    href: 'https://github.com/',
     src: '/images/icon-github.svg',
     alt: 'Github Icon',
   },
   {
-    href: 'https://www.linkedin.com/in/samuel-cf-lau/',
+    href: 'https://www.linkedin.com/',
     src: '/images/icon-linkedin.svg',
     alt: 'Linkedin Icon',
   },
   {
-    href: 'https://www.instagram.com/samuel_cf_lau/',
+    href: 'https://www.instagram.com/',
     src: '/images/icon-instagram.svg',
     alt: 'Instagram',
   },

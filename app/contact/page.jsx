@@ -32,31 +32,42 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    try {
-      const { email, subject, message } = formData;
-
-      const response = await axios.post(`${SEND_URL}`, {
-        email,
-        subject,
-        message,
-      });
-
-      if (response.status === 200) {
-        toast.success('Email sent successfully');
-        setFormData({
-          email: '',
-          subject: '',
-          message: '',
-        });
-      } else {
-        toast.error('Failed to send email');
-      }
-    } catch (error) {
-      console.error('Error sending email:', error);
-      toast.error('Error sending email');
-    } finally {
+    /**
+     * For demonstration purpose
+     */
+    setTimeout(() => {
+      toast.success('Email sent successfully');
       setIsLoading(false);
-    }
+    }, 1000);
+
+    /**
+     * Uncomment the below codes if you wish to utilize this functionality
+     */
+    // try {
+    //   const { email, subject, message } = formData;
+
+    //   const response = await axios.post(`${SEND_URL}`, {
+    //     email,
+    //     subject,
+    //     message,
+    //   });
+
+    //   if (response.status === 200) {
+    //     toast.success('Email sent successfully');
+    //     setFormData({
+    //       email: '',
+    //       subject: '',
+    //       message: '',
+    //     });
+    //   } else {
+    //     toast.error('Failed to send email');
+    //   }
+    // } catch (error) {
+    //   console.error('Error sending email:', error);
+    //   toast.error('Error sending email');
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   return (
