@@ -3,5 +3,11 @@
     "app/api/**/*.js": {
       "maxDuration": 300
     }
-  }
+  },
+  "rewrites": [
+    {
+      "source": "/stats/:match*",
+      "destination": "https://analytics.umami.is/:match*"
+    }
+  ]
 }

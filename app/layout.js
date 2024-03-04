@@ -1,3 +1,4 @@
+import Script from 'next/script';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 import { ThemeProvider } from '@/context/theme-provider';
@@ -30,6 +31,11 @@ export default function RootLayout({ children }) {
         <SpeedInsights />
         <Analytics />
       </body>
+      <Script
+        defer
+        src="https://eu.umami.is/script.js"
+        data-website-id={process.env.UMAMI_DATA_WEBSITE_ID}
+      />
     </html>
   );
 }
