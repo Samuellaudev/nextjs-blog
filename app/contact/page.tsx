@@ -9,26 +9,27 @@ import { ToastContainer, toast } from 'react-toastify';
 import styles from './contactStyle.module.css';
 import { socialLinks } from '@/utils/constants';
 
+interface FormData {
+  email: string
+  subject: string
+  message: string
+}
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    email: '',
-    subject: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState<FormData>({} as FormData);
   const [isLoading, setIsLoading] = useState(false);
 
   const connectMessage =
     "I'm actively seeking new opportunities and would love to connect with you. Feel free to drop me a message, whether you have a question or just want to say hello!";
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    const { name, value } = e.target as HTMLInputElement
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 

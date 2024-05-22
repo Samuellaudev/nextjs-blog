@@ -1,7 +1,15 @@
 import Link from 'next/link';
 import styles from './pagination.module.css';
 
-const PaginationLink = ({ arrowType, page, pages, pageType, search = '' }) => {
+interface PaginationLinkProps {
+  arrowType: 'left' | 'right';
+  page: number;
+  pages: number;
+  search: string;
+  pageType: 'blog' | 'dashboard';
+}
+
+const PaginationLink = ({ arrowType, page, pages, pageType, search = '' }: PaginationLinkProps) => {
   return (
     <>
       {arrowType === 'left' && (
