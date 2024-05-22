@@ -1,6 +1,6 @@
 'use client';
 import { USERS_URL, blogPage, dashboardPage } from '@/utils/constants';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext, Suspense } from 'react';
 import { ThemeContext } from '@/context/theme-provider';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
@@ -64,7 +64,7 @@ const Navbar = () => {
         {/* Desktop Menu */}
         <div className="desktop-menu hidden md:block md:w-auto" id="navbar">
           <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 mt-0 items-center">
-            {pathname.includes('/blog') && <SearchBox />}
+            <Suspense>{pathname.includes('/blog') && <SearchBox />}</Suspense>
             {isLogin && checkUserInfo > 0 && (
               <>
                 {userInfo.isAdmin ? (
@@ -104,7 +104,9 @@ const Navbar = () => {
         <div className="mobile-menu md:hidden flex items-center">
           {pathname.includes('/blog') && (
             <div className="mr-4">
-              <SearchBox isMobile={true} />
+              <Suspense>
+                <SearchBox isMobile={true} />
+              </Suspense>
             </div>
           )}
           <button onClick={handleNavBarOpen} className={styles.menuIcon}>
