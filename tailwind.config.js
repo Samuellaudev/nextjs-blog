@@ -17,11 +17,10 @@ module.exports = {
       animation: {
         'spin-slow': 'spin 3s linear infinite',
       },
-    },
-    colors: {
-      ...colors,
-      primary: colors.orange,
-      secondary: colors.green,
+      colors: {
+        primary: colors.orange,
+        secondary: colors.green,
+      },
     },
   },
   plugins: [],
