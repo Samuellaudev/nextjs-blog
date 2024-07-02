@@ -51,7 +51,7 @@ const HeroSection = () => {
 
   return (
     <section className="container mt-16 md:mt-28 mx-auto">
-      <h2 className="text-3xl mb-9 md:text-4xl text-gray-500 dark:text-white">
+      <h2 className="text-3xl mb-9 text-center md:text-4xl text-gray-500 dark:text-white">
         Featured Post
       </h2>
       <PostImage
