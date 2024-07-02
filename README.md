@@ -13,7 +13,8 @@ A serverless web application that utilizes Next.js and MongoDB to create a custo
 - Show all posts in home page and blog page
 - Add, edit or delete post in edit-mode (Admin only)
 - Utilized Vercel's Serverless Functions to interact directly with MongoDB
-- Upload image using AWS S3 and retrieve it through presigned URLs
+- ~~Upload image using AWS S3 and retrieve it through presigned URLs~~
+- Upload image using Cloudinary
 - User management system using JWT authorization with HttpOnly Cookie
 - Implementing Stripe payment gateway (Test Mode) for premium content access
 - Dark Mode integration

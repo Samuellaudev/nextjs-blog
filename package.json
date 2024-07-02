@@ -21,6 +21,7 @@
     "@vercel/speed-insights": "^1.0.7",
     "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.2.0",
     "clsx": "^2.0.0",
     "colors": "^1.4.0",
     "dotenv": "^16.3.1",

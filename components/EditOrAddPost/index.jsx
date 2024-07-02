@@ -1,18 +1,18 @@
 'use client';
 
 import {
-  AWS_S3_UPLOAD_URL,
+  IMAGE_UPLOAD_URL,
   POSTS_URL,
   fieldMap,
   dashboardPage,
 } from '@/utils/constants';
+import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useRouter, useParams } from 'next/navigation';
-import axios from 'axios';
 import MarkdownPreview from '@/components/Markdown/MarkdownPreview';
 import { ToastContainer, toast } from 'react-toastify';
 import styles from './editOrAddPostStyles.module.css';
-import { modifiedImageName, originalImageName } from '@/utils/helpers';
+import { originalImageName } from '@/utils/helpers';
 
 const EditOrAddNewPost = ({ postType }) => {
   const [isLogin, setIsLogin] = useState(false);
@@ -59,66 +59,63 @@ const EditOrAddNewPost = ({ postType }) => {
     }
   }, [router, params.id]);
 
-  const handleInputChange = (e, updateFunction) =>
-    updateFunction(e.target.value);
+  const handleInputChange = (e, updateFunction) => {
+    return updateFunction(e.target.value);
+  };
   const handleImageChange = (e) => setImage(e.target.files[0]);
 
-  const uploadImage = async (formData) => {
+  const uploadImage = async (image) => {
+    const newImage = new File([image], image?.name, {
+      type: image.type,
+      lastModified: image.lastModified,
+    });
+
+    const formData = new FormData();
+    formData.append('image', newImage);
+
     try {
-      const response = await fetch(`${AWS_S3_UPLOAD_URL}`, {
+      const response = await fetch(`${IMAGE_UPLOAD_URL}`, {
         method: 'POST',
         body: formData,
       });
+      const result = await response.json();
 
-      await response.json();
+      return result.url;
     } catch (error) {
       console.log(error);
     }
   };
 
+  const isFormInvalid = ({ title, body, description }) => {
+    return title === '' || body === '' || description === '';
+  };
+
+  const resetForm = () => {
+    setTitle('');
+    setBody('');
+    setDescription('');
+    setImage({});
+  };
+
+  const redirectToDashboard = () => {
+    setTimeout(() => {
+      router.push(`${dashboardPage}`);
+    }, 500);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const isFormInvalid = ({ title, body, description }) => {
-      return title === '' || body === '' || description === '';
-    };
-
-    const handleImage = (image) => {
-      const newImage = new File(
-        [image],
-        modifiedImageName(params.id, image?.name),
-        {
-          type: image.type,
-          lastModified: image.lastModified,
-        },
-      );
-
-      const formData = new FormData();
-      formData.append('image', newImage);
-
-      uploadImage(formData);
-    };
-
-    const resetForm = () => {
-      setTitle('');
-      setBody('');
-      setDescription('');
-      setImage({});
-    };
-
-    const redirectToDashboard = () => {
-      setTimeout(() => {
-        router.push(`${dashboardPage}`);
-      }, 500);
-    };
-
     try {
+      const imgUrl = await uploadImage(image);
+
       const postData = {
         title,
         body,
         description,
         image: {
-          name: modifiedImageName(params.id, image?.name),
+          url: imgUrl,
+          name: image?.name,
           type: image?.type,
           lastModified: image?.lastModified,
         },
@@ -144,19 +141,10 @@ const EditOrAddNewPost = ({ postType }) => {
         return;
       }
 
-      // Upload to aws-s3
-      if (image?.name) {
-        handleImage(image);
-      }
-
-      if (postType === 'new-post') {
-        resetForm();
-      }
+      if (postType === 'new-post') resetForm();
 
       toast.success(fieldMap[postType].successMessage);
-      setTimeout(() => {
-        redirectToDashboard();
-      }, 500);
+      setTimeout(() => redirectToDashboard(), 500);
     } catch (error) {
       console.log(error);
       toast.error(fieldMap[postType].errorMessage);

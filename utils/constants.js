@@ -30,8 +30,9 @@ export const SEND_URL = '/api/send';
 export const USERS_URL = '/api/users';
 export const POSTS_URL = '/api/posts';
 export const EMAILS_URL = '/api/emails';
-export const AWS_S3_GET_URL = '/api/aws-s3';
-export const AWS_S3_UPLOAD_URL = '/api/aws-s3/upload';
+// export const AWS_S3_GET_URL = '/api/aws-s3';
+// export const AWS_S3_UPLOAD_URL = '/api/aws-s3/upload';
+export const IMAGE_UPLOAD_URL = '/api/cloudinary/upload';
 
 // EditOrAddNewPost
 export const fieldMap = {

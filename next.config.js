@@ -6,6 +6,11 @@ const nextConfig = {
         protocol: 'https',
         hostname: process.env.AWS_HOST_NAME,
       },
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '**',
+      },
     ],
   },
 };

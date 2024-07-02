@@ -4,6 +4,7 @@ export interface Post {
   description: string;
   body: string;
   image: {
+    url: string;
     name: string;
     type: string;
     lastModified: number;

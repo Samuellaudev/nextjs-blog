@@ -6,7 +6,7 @@ import { ThemeContext } from '@/context/theme-provider';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { readingTime, formatDate } from '@/utils/helpers';
-import S3Image from '@/components/AWS/S3Image';
+import PostImage from '@/components/PostImage';
 import MarkdownPreview from '@/components/Markdown/MarkdownPreview';
 import CheckoutForm from '@/components/Stripe/CheckoutForm';
 import { createCheckoutSession } from '@/app/actions/stripe';
@@ -52,7 +52,8 @@ const Post = ({ params }) => {
     fetchPost();
   }, [params.id]);
 
-  const checkIsVerified = () => (!isVerified ? styles.blurred__container : '');
+  // Determine if the content should be blurred for unverified users
+  const checkIsVerified = () => (isVerified ? '' : styles.blurred__container);
 
   const checkIsPremiumPost = (post) => {
     if (post.isPremium) {
@@ -75,8 +76,8 @@ const Post = ({ params }) => {
       ) : (
         <>
           <div className="mb-6">
-            <S3Image
-              imageName={post?.image?.name}
+            <PostImage
+              imageUrl={post?.image?.url}
               className="rounded-md mx-auto"
             />
           </div>

@@ -4,7 +4,7 @@ import { POSTS_URL } from '@/utils/constants';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
-import S3Image from '../AWS/S3Image';
+import PostImage from '@/components/PostImage';
 import { formatDate } from '@/utils/helpers';
 import { Post } from '@/types/posts.type';
 
@@ -17,6 +17,7 @@ const initialPost: Post = {
   updatedAt: "",
   __v: 0,
   image: {
+    url: "",
     name: "",
     type: "",
     lastModified: 0
@@ -53,8 +54,8 @@ const HeroSection = () => {
       <h2 className="text-3xl mb-9 md:text-4xl text-gray-500 dark:text-white">
         Featured Post
       </h2>
-      <S3Image
-        imageName={ featuredPost?.image?.name }
+      <PostImage
+        imageUrl={ featuredPost?.image?.url }
         className="relative z-10 object-cover w-full rounded-md h-96 border"
       />
 
